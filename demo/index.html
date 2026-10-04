@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moss</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f2ea;
+        --panel: #ffffff;
+        --text: #1d2a1f;
+        --muted: #667066;
+        --line: #dcd9cc;
+        --accent: #4f8a3c;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141813;
+          --panel: #1d231c;
+          --text: #e8ece4;
+          --muted: #98a295;
+          --line: #2f382d;
+          --accent: #8cc474;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 32px 16px 48px;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.5 system-ui, sans-serif;
+      }
+      main { max-width: 720px; margin: 0 auto; }
+      h1 { margin: 0; font-size: 28px; }
+      p.lede { margin: 4px 0 24px; color: var(--muted); }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      #stage { display: flex; justify-content: center; }
+      #readout { text-align: center; margin: 8px 0 16px; }
+      #stage-name { font-size: 20px; font-weight: 600; }
+      #age { color: var(--muted); font-variant-numeric: tabular-nums; }
+      input[type="range"] { width: 100%; accent-color: var(--accent); }
+      .ticks {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      h2 { font-size: 16px; margin: 32px 0 12px; }
+      #lifetime {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+        gap: 8px;
+      }
+      #lifetime button {
+        font: inherit;
+        color: inherit;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 8px 4px;
+        cursor: pointer;
+      }
+      #lifetime button:hover { border-color: var(--accent); }
+      #lifetime span { display: block; font-size: 12px; color: var(--muted); }
+      .born { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+      .born input {
+        font: inherit;
+        color: inherit;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 4px 8px;
+      }
+      #born-result { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Moss</h1>
+      <p class="lede">A mascot that ages with you. Drag the slider to move through its life.</p>
+
+      <div class="panel">
+        <div id="stage"></div>
+        <div id="readout">
+          <div id="stage-name"></div>
+          <div id="age"></div>
+        </div>
+        <input id="slider" type="range" min="0" max="60" step="0.05" value="0" aria-label="Age in years" />
+        <div class="ticks"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 years</span></div>
+      </div>
+
+      <h2>A lifetime</h2>
+      <div id="lifetime"></div>
+
+      <h2>Your mascot today</h2>
+      <div class="born">
+        <label for="born">First used on</label>
+        <input id="born" type="date" />
+        <span id="born-result"></span>
+      </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
